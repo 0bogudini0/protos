@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "celerichain.sso.v1;ssov1";
+
+service Auth{
+  rpc Regiester (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegisterRequest{
+  string name = 1;
+  string surname = 2;
+  string email = 3;
+  repeated string location_id = 4;
+  string primary_account_id = 5;
+  string password =6;
+}
+
+message RegisterResponse{
+  string user_id = 1;
+}
+
+message LoginRequest{
+  string email = 1;
+  string password = 2;
+  int32 app_id = 3;
+}
+
+message LoginResponse{
+  string token = 1;
+}
+
+message IsAdminRequest{
+  string user_id = 1;
+}
+
+message IsAdminResponse{
+  bool is_admin = 1;
+}
